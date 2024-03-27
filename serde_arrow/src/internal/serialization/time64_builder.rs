@@ -75,6 +75,12 @@ impl SimpleSerializer for Time64Builder {
         Ok(())
     }
 
+    fn serialize_u64(&mut self, v: u64) -> Result<()> {
+        push_validity(&mut self.validity, true)?;
+        self.buffer.push(v as i64);
+        Ok(())
+    }
+
     fn serialize_i64(&mut self, v: i64) -> Result<()> {
         push_validity(&mut self.validity, true)?;
         self.buffer.push(v);
